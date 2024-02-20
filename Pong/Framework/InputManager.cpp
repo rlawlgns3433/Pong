@@ -21,8 +21,10 @@ void InputManager::Init()
 	infoHorizontal.axis = Axis::Horizontal;
 	infoHorizontal.positives.push_back(sf::Keyboard::D);
 	infoHorizontal.positives.push_back(sf::Keyboard::Right);
+	infoHorizontal.positives.push_back(MouseButtonToKey(sf::Mouse::Right));
 	infoHorizontal.negatives.push_back(sf::Keyboard::A);
 	infoHorizontal.negatives.push_back(sf::Keyboard::Left);
+	infoHorizontal.negatives.push_back(MouseButtonToKey(sf::Mouse::Left));
 	infoHorizontal.sensitive = 5.f;
 	infoHorizontal.value = 0.f;
 
@@ -69,7 +71,6 @@ void InputManager::UpdateEvent(const sf::Event& event)
 	switch (event.type)
 	{
 	case sf::Event::KeyPressed:
-		// ingList에 없는 경우가 필요하다.
 		if (!GetKey(event.key.code))
 		{
 			//downKeyMap[(sf::Keyboard::Key)EncryptKey(event.key.code)] = true;
@@ -87,17 +88,17 @@ void InputManager::UpdateEvent(const sf::Event& event)
 		break;
 
 	case sf::Event::MouseButtonPressed:
-		if (!GetMouseButton((sf::Mouse::Button)event.key.code))
+		if (!GetMouseButton(event.mouseButton.button))
 		{
-			downKeyList.push_back((sf::Keyboard::Key)(event.key.code + 75));
-			ingKeyList.push_back((sf::Keyboard::Key)(event.key.code + 75));
+			sf::Keyboard::Key button = MouseButtonToKey(event.mouseButton.button);
+			downKeyList.push_back(button);
+			ingKeyList.push_back(button);
 		}
 		break;
 	case sf::Event::MouseButtonReleased:
-		ingKeyList.remove((sf::Keyboard::Key)(event.key.code + 75));
-		upKeyList.push_back((sf::Keyboard::Key)(event.key.code + 75));
-		break;
-	default:
+		sf::Keyboard::Key button = MouseButtonToKey(event.mouseButton.button);
+		ingKeyList.remove(button);
+		upKeyList.push_back(button);
 		break;
 	}
 }
@@ -171,24 +172,24 @@ float InputManager::GetAxis(Axis axis)
 }
 
 
-const sf::Vector2f& InputManager::GetMousePos(sf::Mouse& mouse)
+sf::Vector2f InputManager::GetMousePos(sf::Mouse& mouse)
 {
 	return (sf::Vector2f)mouse.getPosition();
 }
 
 bool InputManager::GetMouseButtonDown(sf::Mouse::Button mouse)
 {
-	return std::find(downKeyList.begin(), downKeyList.end(), mouse + 75) != downKeyList.end();
+	return std::find(downKeyList.begin(), downKeyList.end(), MouseButtonToKey(mouse)) != downKeyList.end();
 }
 
 bool InputManager::GetMouseButtonUp(sf::Mouse::Button mouse)
 {
-	return std::find(upKeyList.begin(), upKeyList.end(), mouse + 75) != upKeyList.end();
+	return std::find(upKeyList.begin(), upKeyList.end(), MouseButtonToKey(mouse)) != upKeyList.end();
 }
 
 bool InputManager::GetMouseButton(sf::Mouse::Button mouse)
 {
-	return std::find(ingKeyList.begin(), ingKeyList.end(), mouse + 75) != ingKeyList.end();
+	return std::find(ingKeyList.begin(), ingKeyList.end(), MouseButtonToKey(mouse)) != ingKeyList.end();
 }
 
 

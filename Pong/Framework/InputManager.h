@@ -53,7 +53,7 @@ public:
 	static bool GetKeyUp(sf::Keyboard::Key key);
 	static bool GetKey(sf::Keyboard::Key key);
 
-	static const sf::Vector2f& GetMousePos(sf::Mouse& mouse);
+	static sf::Vector2f GetMousePos(sf::Mouse& mouse);
 	static bool GetMouseButtonDown(sf::Mouse::Button mouse);
 	static bool GetMouseButtonUp(sf::Mouse::Button mouse);
 	static bool GetMouseButton(sf::Mouse::Button mouse);
@@ -61,6 +61,8 @@ public:
 	static float GetAxisRaw(Axis axis); // -1.f  /  0.f  /  1.f
 	static float GetAxis(Axis axis); // -1.f ~ 1.f
 
+	static sf::Keyboard::Key MouseButtonToKey(sf::Mouse::Button button) { return (sf::Keyboard::Key)(button + sf::Keyboard::Key::KeyCount); };
+	static sf::Mouse::Button KeytoMouseButton(sf::Keyboard::Key key) { return (sf::Mouse::Button)(key + sf::Keyboard::Key::KeyCount); };
 
 	//static int EncryptKey(sf::Keyboard::Key key);
 	//static sf::Keyboard::Key DecryptKey(int cipherText);

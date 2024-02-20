@@ -153,7 +153,7 @@
     <ClCompile Include="pong.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="Framework\SceneGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -171,7 +171,7 @@
     <ClInclude Include="Framework\GameObject.h" />
     <ClInclude Include="Framework\Scene.h" />
     <ClInclude Include="Framework\SceneManager.h" />
-    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="Framework\SceneGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

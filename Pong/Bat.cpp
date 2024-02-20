@@ -17,6 +17,7 @@ void Bat::Init()
 
 void Bat::Update(float dt)
 {
+	prevGlobalBounds = shape.getGlobalBounds();
  	float h = InputManager::GetAxis(Axis::Horizontal);
 	sf::Vector2f pos = shape.getPosition();
 	pos.x += h * speed * dt;

@@ -15,6 +15,8 @@ public:
 	Bat& operator=(Bat&&)		= delete;
 
 	sf::RectangleShape shape;
+	sf::FloatRect prevGlobalBounds;
+	
 	float speed = 500;
 
 

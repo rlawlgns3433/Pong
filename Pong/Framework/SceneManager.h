@@ -30,6 +30,9 @@ protected:
 	std::vector<std::string> FontResourceNames = { "Font/DS-DIGI.ttf" };
 	std::vector<std::string> SoundResourceNames = {};
 
+	unsigned lives = 3;
+	unsigned score = 0;
+
 public:
 
 	SceneManager() = default;
@@ -44,6 +47,12 @@ public:
 	void ChangeScene(SceneIDs id);
 	void Update(float dt);
 	void Draw(sf::RenderWindow& window);
+
+	void SetScore(unsigned score) { this->score = score; }
+	void SetLives(unsigned lives) { this->lives = lives; }
+
+	unsigned GetScore() const { return this->score; }
+	unsigned GetLives() const { return this->lives; }
 };
 
 #define SCENE_MANAGER (Singleton<SceneManager>::Instance())
