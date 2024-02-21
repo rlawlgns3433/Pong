@@ -170,6 +170,7 @@ void SceneGame::UpdateGameover(float dt)
     if (InputManager::GetKeyDown(sf::Keyboard::Enter))
     {
         Reset();
+        status = GameStatus::Game;
     }
 }
 
